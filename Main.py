@@ -1,4 +1,5 @@
 from pyfcm import FCMNotification
+import random
 
 
 push_service = FCMNotification(api_key="AAAA8un-MkA:APA91bFJnBY7q37ERY3cq4F5QULtsV_-YuWLG1e_CxhSfRKzeusdlx-PW73cDdHCzNign3YZvdFv0yeg0O6UikwdVCgo1cmOamrJRqXWHBG19WPJfNS3dXg4fRyGQMa66c5fF3MYOoqG") #api_key from firebase project
@@ -9,19 +10,35 @@ message_title = "Hello World"
 message_body_short = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis."
 message_body_average = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis."
 message_body_long = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis."
-    
+messages = [message_body_short, message_body_average, message_body_long] 
     
 def random_messages():
-    pass
-
+    for i in range(50):
+        result = push_service.notify_multiple_devices(registration_ids=registration_ids,
+                                         message_title=message_title,
+                                         message_body=messages[random.randint(0,3)])
+        
+        
 def variety_messages():
-    pass
+    for j in range(3):
+        for i in range(25):
+            result = push_service.notify_multiple_devices(registration_ids=registration_ids,
+                                             message_title=message_title,
+                                             message_body=messages[j])
 
 def consistent_average():
-    pass
+    while True:
+        result = push_service.notify_multiple_devices(registration_ids=registration_ids,
+                                         message_title=message_title,
+                                         message_body=messages[1])
+        
 
 def stress_test():
-    pass
+    while True:
+        result = push_service.notify_multiple_devices(registration_ids=registration_ids,
+                                         message_title=message_title,
+                                         message_body=messages[0])
+        
 
 
 if __name__ == '__main__':
