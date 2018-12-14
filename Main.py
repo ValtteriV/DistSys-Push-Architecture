@@ -32,12 +32,12 @@ def send_a_message(registration_ids, message_title, message_body):
     return push_service.notify_multiple_devices(registration_ids=registration_ids, message_title=message_title, message_body=message_body)
     
 
-@timing
+
 def random_messages():
     for i in range(25):
         result = send_a_message(registration_ids,
                                          message_title,
-                                         messages[0])
+                                         messages[2])
         
         
 def variety_messages():
