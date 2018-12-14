@@ -1,5 +1,6 @@
 from pyfcm import FCMNotification
 import random, time
+import matplotlib.pylab as plt
 
 
 push_service = FCMNotification(api_key="AAAA8un-MkA:APA91bFJnBY7q37ERY3cq4F5QULtsV_-YuWLG1e_CxhSfRKzeusdlx-PW73cDdHCzNign3YZvdFv0yeg0O6UikwdVCgo1cmOamrJRqXWHBG19WPJfNS3dXg4fRyGQMa66c5fF3MYOoqG") #api_key from firebase project
@@ -58,7 +59,7 @@ def consistent_average():
         
 
 def stress_test():
-    for i in range(600):
+    for i in range(100):
         result = send_a_message(registration_ids,
                                          "b",
                                          "a")
@@ -81,7 +82,8 @@ if __name__ == '__main__':
         except:
             print("happened an oopsie woopsie :(")
         finally:
-            print("TODO PLOT")
+            plt.plot(message_analytics)
+            plt.show()
     else: 
         print("Input error")
         exit(1)
