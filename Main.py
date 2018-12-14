@@ -76,7 +76,12 @@ if __name__ == '__main__':
     elif choice == "3":
         consistent_average()
     elif choice == "4":
-        stress_test()
+        try:
+            stress_test()
+        except:
+            print("happened an oopsie woopsie :(")
+        finally:
+            print("TODO PLOT")
     else: 
         print("Input error")
         exit(1)
