@@ -58,10 +58,10 @@ def consistent_average():
         
 
 def stress_test():
-    while True:
+    for i in range(600):
         result = send_a_message(registration_ids,
-                                         message_title,
-                                         messages[0])
+                                         "b",
+                                         "a")
         
 
 
