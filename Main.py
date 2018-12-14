@@ -37,28 +37,28 @@ def random_messages():
     for i in range(25):
         result = send_a_message(registration_ids,
                                          message_title,
-                                         messages[2])
+                                         messages[0])
         
         
 def variety_messages():
     for j in range(3):
         for i in range(25):
-            result = send_a_message(registration_ids=registration_ids,
-                                             message_title=message_title,
-                                             message_body=messages[j])
+            result = send_a_message(registration_ids,
+                                             message_title,
+                                             messages[j])
 
 def consistent_average():
     while True:
-        result = send_a_message(registration_ids=registration_ids,
-                                         message_title=message_title,
-                                         message_body=messages[1])
+        result = send_a_message(registration_ids,
+                                         message_title,
+                                         messages[1])
         
 
 def stress_test():
     while True:
-        result = send_a_message(registration_ids=registration_ids,
-                                         message_title=message_title,
-                                         message_body=messages[0])
+        result = send_a_message(registration_ids,
+                                         message_title,
+                                         messages[0])
         
 
 
