@@ -34,10 +34,10 @@ def send_a_message(registration_ids, message_title, message_body):
 
 
 def random_messages():
-    for i in range(25):
+    for i in range(50):
         result = send_a_message(registration_ids,
                                          message_title,
-                                         messages[2])
+                                         messages[random.randint(0,2)])
         
         
 def variety_messages():
@@ -46,6 +46,9 @@ def variety_messages():
             result = send_a_message(registration_ids,
                                              message_title,
                                              messages[j])
+        print('The choice you made took {:.3f} ms to finish on average'.format((sum(message_analytics)/float(len(message_analytics)))))
+        message_analytics.clear()
+        
 
 def consistent_average():
     while True:
@@ -79,7 +82,7 @@ if __name__ == '__main__':
         exit(1)
     
     
-    print('The choice you made took {:.3f} ms to finish on average'.format((sum(message_analytics)/float(len(message_analytics)))))
+    print('The choice you made took {:.3f} ms to finish on average'.format((sum(message_analytics)/float(len(message_analytics)))) if len(message_analytics) != 0 else ":)")
     
     
 
