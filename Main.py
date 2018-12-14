@@ -12,8 +12,8 @@ registration_ids = [regid] #The id of the client(s) to receive messages
 message_title = "Hello World"
     
 message_body_short = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis."
-message_body_average = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis."
-message_body_long = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis."
+message_body_average = message_body_short * 50
+message_body_long = message_body_average * 100
 messages = [message_body_short, message_body_average, message_body_long] 
     
 def timing(f):
@@ -27,10 +27,10 @@ def timing(f):
 
 @timing
 def random_messages():
-    for i in range(50):
+    for i in range(25):
         result = push_service.notify_multiple_devices(registration_ids=registration_ids,
                                          message_title=message_title,
-                                         message_body=messages[random.randint(0,2)])
+                                         message_body=messages[2])
         
         
 def variety_messages():
@@ -71,10 +71,6 @@ if __name__ == '__main__':
         print("Input error")
         exit(1)
     
-    result = push_service.notify_multiple_devices(registration_ids=registration_ids,
-                                         message_title=message_title,
-                                         message_body=message_body_short)
     
-    print(result)
 
     
