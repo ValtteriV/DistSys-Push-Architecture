@@ -1,5 +1,5 @@
 from pyfcm import FCMNotification
-import random
+import random, time
 
 
 push_service = FCMNotification(api_key="AAAA8un-MkA:APA91bFJnBY7q37ERY3cq4F5QULtsV_-YuWLG1e_CxhSfRKzeusdlx-PW73cDdHCzNign3YZvdFv0yeg0O6UikwdVCgo1cmOamrJRqXWHBG19WPJfNS3dXg4fRyGQMa66c5fF3MYOoqG") #api_key from firebase project
@@ -16,6 +16,16 @@ message_body_average = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 message_body_long = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis."
 messages = [message_body_short, message_body_average, message_body_long] 
     
+def timing(f):
+    def wrap(*args):
+        start = time.time()
+        ret = f(*args)
+        end = time.time()
+        print('{:s} function took {:.3f} ms'.format(f.__name__, (end-start)*1000.0))
+        return ret
+    return wrap
+
+@timing
 def random_messages():
     for i in range(50):
         result = push_service.notify_multiple_devices(registration_ids=registration_ids,
