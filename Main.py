@@ -15,41 +15,48 @@ message_body_short = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. P
 message_body_average = message_body_short * 50
 message_body_long = message_body_average * 100
 messages = [message_body_short, message_body_average, message_body_long] 
+
+message_analytics = []
     
 def timing(f):
     def wrap(*args):
         start = time.time()
         ret = f(*args)
         end = time.time()
-        print('{:s} function took {:.3f} ms'.format(f.__name__, (end-start)*1000.0))
+        message_analytics.append((end-start)*1000.0)
         return ret
     return wrap
 
 @timing
+def send_a_message(registration_ids, message_title, message_body):
+    return push_service.notify_multiple_devices(registration_ids=registration_ids, message_title=message_title, message_body=message_body)
+    
+
+@timing
 def random_messages():
     for i in range(25):
-        result = push_service.notify_multiple_devices(registration_ids=registration_ids,
-                                         message_title=message_title,
-                                         message_body=messages[2])
+        result = send_a_message(registration_ids,
+                                         message_title,
+                                         messages[2])
         
         
 def variety_messages():
     for j in range(3):
         for i in range(25):
-            result = push_service.notify_multiple_devices(registration_ids=registration_ids,
+            result = send_a_message(registration_ids=registration_ids,
                                              message_title=message_title,
                                              message_body=messages[j])
 
 def consistent_average():
     while True:
-        result = push_service.notify_multiple_devices(registration_ids=registration_ids,
+        result = send_a_message(registration_ids=registration_ids,
                                          message_title=message_title,
                                          message_body=messages[1])
         
 
 def stress_test():
     while True:
-        result = push_service.notify_multiple_devices(registration_ids=registration_ids,
+        result = send_a_message(registration_ids=registration_ids,
                                          message_title=message_title,
                                          message_body=messages[0])
         
@@ -70,6 +77,9 @@ if __name__ == '__main__':
     else: 
         print("Input error")
         exit(1)
+    
+    
+    print('The choice you made took {:.3f} ms to finish on average'.format((sum(message_analytics)/float(len(message_analytics)))))
     
     
 
